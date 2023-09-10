@@ -1,4 +1,5 @@
 import { Database } from './database.js';
+import { randomUUID } from 'node:crypto';
 
 const database = new Database();
 
@@ -18,12 +19,12 @@ export const routes = [
       const { title, description } = req.body;
 
       const task = {
-        id: 1,
+        id: randomUUID(),
         title,
         description,
         createdAt: new Date(),
+        updatedAt: new Date(),
         completedAt: null,
-        updatedAt: null,
       };
 
       database.insert('tasks', task);
