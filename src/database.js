@@ -42,4 +42,23 @@ export class Database {
       this.#persist();
     }
   }
+
+  update(table, id, data) {
+    const rowIndex = this.#database[table].findIndex((row) => row.id === id);
+
+    if (rowIndex > -1) {
+      const row = this.#database[table][rowIndex];
+
+      if (data.title) {
+        row.title = data.title;
+      }
+
+      if (data.description) {
+        row.description = data.description;
+      }
+
+      row.updatedAt = new Date();
+      this.#persist();
+    }
+  }
 }
