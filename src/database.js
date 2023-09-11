@@ -70,4 +70,16 @@ export class Database {
       this.#persist();
     }
   }
+
+  complete(table, id) {
+    const rowIndex = this.#database[table].findIndex((row) => row.id === id);
+
+    if (rowIndex > -1) {
+      const row = this.#database[table][rowIndex];
+
+      row.completedAt = row.completedAt === null ? new Date() : null;
+
+      this.#persist();
+    }
+  }
 }
